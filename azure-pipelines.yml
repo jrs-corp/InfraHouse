@@ -16,7 +16,7 @@ steps:
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
-    docker run -it hello-world
+    # docker run -it hello-world
     # docker login infrahouse.azurecr.io
     # docker tag hello-world infrahouse.azurecr.io/hello-world
     # docker push infrahouse.azurecr.io/hello-world
