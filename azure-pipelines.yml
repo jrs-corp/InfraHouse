@@ -16,6 +16,8 @@ steps:
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
+    terraform init
+    terraform apply
     # docker run -it hello-world
     # docker login infrahouse.azurecr.io
     # docker tag hello-world infrahouse.azurecr.io/hello-world
