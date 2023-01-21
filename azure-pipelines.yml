@@ -7,7 +7,7 @@ trigger:
 - main
 
 pool:
-  vmImage: agentpool
+  vmImage: AgentPool
 
 steps:
 - script: echo Hello, world, Develop!
