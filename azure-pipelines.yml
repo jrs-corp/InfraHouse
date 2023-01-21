@@ -20,6 +20,7 @@ steps:
     # docker login infrahouse.azurecr.io
     # docker tag hello-world infrahouse.azurecr.io/hello-world
     # docker push infrahouse.azurecr.io/hello-world
+    docker pull hello-world
     docker tag hello-world infrahouse.azurecr.io/hello-world
   displayName: 'Run a multi-line script'
 
