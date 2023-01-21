@@ -35,8 +35,15 @@ steps:
     containerRegistry: 'infrahouse'
     command: 'login'
 
+# - task: Docker@2
+#   inputs:
+#     containerRegistry: 'infrahouse'
+#     repository: 'hello-world'
+#     command: 'push'
+
 - task: Docker@2
   inputs:
     containerRegistry: 'infrahouse'
     repository: 'hello-world'
     command: 'push'
+    tags: latest
