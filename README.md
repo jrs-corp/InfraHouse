@@ -1,2 +1,2 @@
 # InfraHouse
-Housing Infrastructure for Small Business..
+Housing Infrastructure for Small Business.
