@@ -4,10 +4,9 @@
 # https://aka.ms/yaml
 
 trigger:
-- main
+- stage
 
-pool:
-  vmImage: ubuntu-latest
+pool: Capstone
 
 steps:
 - script: echo Hello, world, Staging!
