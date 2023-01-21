@@ -3,9 +3,6 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-trigger:
-- main
-
 pool: Capstone
 
 steps:
@@ -15,4 +12,36 @@ steps:
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
+    terraform init
+    terraform apply
+    # docker run -it hello-world
+    # docker login infrahouse.azurecr.io
+    # docker tag hello-world infrahouse.azurecr.io/hello-world
+    # docker push infrahouse.azurecr.io/hello-world
+    # docker pull hello-world
+    docker tag hello-world infrahouse.azurecr.io/hello-world
   displayName: 'Run a multi-line script'
+
+# - task: Docker@2
+#   inputs:
+#     containerRegistry: 'infrahouse.azurecr.io'
+#     repository: 'hello-world'
+#     command: 'push'
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'infrahouse'
+    command: 'login'
+
+# - task: Docker@2
+#   inputs:
+#     containerRegistry: 'infrahouse'
+#     repository: 'hello-world'
+#     command: 'push'
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'infrahouse'
+    repository: 'hello-world'
+    command: 'push'
+    tags: latest
