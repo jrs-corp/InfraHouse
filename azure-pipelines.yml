@@ -6,8 +6,8 @@
 trigger:
 - main
 
-pool:
-  vmImage: ubuntu-latest
+pool: Capstone
+  # vmImage: ubuntu-latest
 
 steps:
 - script: echo Hello, world, Develop!
