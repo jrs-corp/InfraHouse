@@ -10,11 +10,13 @@ terraform {
 }
 
 provider "aws" {
-  region  = "us-west-2"
+  region  = "us-east-1"
+  access_key = ""
+  secret_key = ""
 }
 
 resource "aws_instance" "app_server" {
-  ami           = "ami-830c94e3"
+  ami           = "ami-0b5eea76982371e91"
   instance_type = "t2.micro"
 
   tags = {
