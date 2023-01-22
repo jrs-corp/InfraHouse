@@ -45,10 +45,12 @@ steps:
     repository: 'hello-world'
     command: 'build'
     Dockerfile: '**/Dockerfile'
+    tags: |
+      $(tag)
 
 - task: Docker@2
   inputs:
     containerRegistry: 'infrahouse'
     repository: 'hello-world'
     command: 'push'
-    tags: latest
+    tags: $(tag)
