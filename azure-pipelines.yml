@@ -6,14 +6,14 @@
 pool: Capstone
 
 steps:
-- script: echo Hello, world, Staging!
+- script: echo Hello, world, Production!
   displayName: 'Run a one-line script'
 
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
-    terraform init
-    terraform apply
+    # terraform init
+    # terraform apply
     # docker run -it hello-world
     # docker login infrahouse.azurecr.io
     # docker tag hello-world infrahouse.azurecr.io/hello-world
@@ -42,6 +42,27 @@ steps:
 - task: Docker@2
   inputs:
     containerRegistry: 'infrahouse'
-    repository: 'hello-world'
+    repository: 'infrahouse'
+    command: 'build'
+    Dockerfile: '**/Dockerfile'
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'infrahouse'
+    repository: 'infrahouse'
     command: 'push'
-    tags: latest
+    tags: $(Build.BuildId)
+
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your commands here
+      
+      touch buildId.txt
+      echo "$(Build.BuildId)">buildId.txt
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Pipeline.Workspace)'
+    publishLocation: 'pipeline'
