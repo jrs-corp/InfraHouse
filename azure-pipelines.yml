@@ -6,7 +6,7 @@
 pool: Capstone
 
 steps:
-- script: echo Hello, world, Staging!
+- script: echo Hello, world, Production!
   displayName: 'Run a one-line script'
 
 - script: |
