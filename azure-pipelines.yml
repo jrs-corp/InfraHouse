@@ -53,6 +53,15 @@ steps:
     command: 'push'
     tags: $(Build.BuildId)
 
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your commands here
+      
+      touch buildId.txt
+      echo "$(Build.BuildId)">buildId.txt
+
 - task: PublishPipelineArtifact@1
   inputs:
     targetPath: '$(Pipeline.Workspace)'
