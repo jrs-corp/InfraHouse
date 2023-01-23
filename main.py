@@ -9,7 +9,19 @@ CORS(app)
 
 @app.route("/")
 def start():
-    return "<p>Hello, Tasty World!</p>"
+    temp_data = {"status":200, "response":"Main Page"} 
+    return temp_data
+
+@app.route("/toutes", methods=['POST'])
+def toutes():
+    platform=request.get_json()['platform']
+    codelocation=request.get_json()['codelocation']
+    print(platform, codelocation)
+    temp_data = {"result": "It will be deployed in the given settings"}
+    print('TEMP_DATA')
+    print(temp_data)
+    return temp_data
+
 
 @app.route("/configuration", methods=['POST'])
 def configuration():
