@@ -43,7 +43,7 @@ function App() {
     //     // setUpdated(response.data)
     //   }
     // )
-    axios.post('http://localhost:5000/toutes', 
+    axios.post('/toutes', 
     {
         "platform": inputmessage,
         "codelocation": message

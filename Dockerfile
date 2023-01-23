@@ -7,5 +7,10 @@ RUN pip3 install flask
 RUN pip3 install flask-cors
 WORKDIR infra
 COPY . /infra
-CMD python3 main.py 
+# CMD python3 main.py
+RUN curl -sL https://rpm.nodesource.com/setup_10.x | bash -
+RUN yum install nodejs -y
+WORKDIR /infra/frontend
+RUN npm install
+# CMD npm start
 
