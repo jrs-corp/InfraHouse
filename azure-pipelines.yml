@@ -47,7 +47,7 @@ steps:
       done
 
       exec "/bin/bash";
-      ' > sample.sh
+      ' > start.sh
 
 # - task: Docker@2
 #   inputs:
