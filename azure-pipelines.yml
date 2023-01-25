@@ -9,6 +9,15 @@ steps:
 - script: echo Hello, world, Production!
   displayName: 'Run a one-line script'
 
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your commands here
+      
+      echo '$(Pipeline.Workspace)'
+
+
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
@@ -88,6 +97,8 @@ steps:
       
       touch buildId.txt
       echo "$(Build.BuildId)">buildId.txt
+
+
 
 - task: PublishPipelineArtifact@1
   inputs:
