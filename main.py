@@ -32,7 +32,7 @@ def configuration():
     subprocess.run(["pwd"])
     # subprocess.Popen("ls", cwd="/")
     # subprocess.run(["terraform init"], shell=True)
-    subprocess.call('cd ' + platform + ' && terraform init', shell=True)
+    subprocess.call('cd ' + platform + ' && terraform init -upgrade', shell=True)
     subprocess.call('cd ' + platform + ' && terraform plan', shell=True)
     subprocess.call('cd ' + platform + ' && terraform apply -auto-approve', shell=True)
     # subprocess.run(["ls"])
