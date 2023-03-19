@@ -56,10 +56,11 @@ function App() {
     //     // setUpdated(response.data)
     //   }
     // )
-    axios.post('/toutes', 
+    axios.post('/configuration', 
     {
         "platform": inputmessage,
-        "codelocation": message
+        "codelocation": message,
+	"imagelocation": "nothing for now"
     }
     )
     .then(  
@@ -103,9 +104,9 @@ function App() {
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          <MenuItem value={'AWS'}>AWS</MenuItem>
-          <MenuItem value={'GCP'}>GCP</MenuItem>
-          <MenuItem value={'Azure'}>Azure</MenuItem>
+          <MenuItem value={'aws'}>aws</MenuItem>
+          <MenuItem value={'gcp'}>gcp</MenuItem>
+          <MenuItem value={'azure'}>azure</MenuItem>
         </Select>
       </FormControl>
 
