@@ -114,6 +114,8 @@ function App() {
           <MenuItem value={'aws'}>aws</MenuItem>
           <MenuItem value={'gcp'}>gcp</MenuItem>
           <MenuItem value={'azure'}>azure</MenuItem>
+	  <MenuItem value={'oracle'}>oracle</MenuItem>
+	  <MenuItem value={'alibaba'}>alibaba</MenuItem>
         </Select>
       </FormControl>
 
