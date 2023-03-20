@@ -16,8 +16,10 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 
-import '@fontsource/roboto/300.css';
+import Chip from '@mui/material/Chip';
+import Stack from '@mui/material/Stack';
 
+import '@fontsource/roboto/300.css';
 
 function App() {
 
@@ -25,6 +27,8 @@ function App() {
   const [message, setMessage] = useState('');
   const [inputmessage, setInputMessage] = useState('');
   const [updated, setUpdated] = useState(message);
+
+  const [data, setData] = useState(null);
 
   // Radio Value
   const [radiovalue, setRadioValue] = useState('code');
@@ -66,6 +70,9 @@ function App() {
     .then(  
       (response) => {
         console.log(response.data)
+	      alert(response.data['result'])
+		alert(response.data['pem'])
+	      setData(response.data['pem'])
       }
     )
   }
@@ -116,7 +123,7 @@ function App() {
 
 {/* Radio Here */}
       
-<RadioGroup
+{/*<RadioGroup
               aria-labelledby="demo-controlled-radio-buttons-group"
               name="controlled-radio-buttons-group"
               value={radiovalue}
@@ -127,19 +134,6 @@ function App() {
             </RadioGroup>
 
             {/* Radio here */}
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     <br />
@@ -163,8 +157,14 @@ function App() {
         <br />
         <br />
         <Button onClick={toggleButtonState} variant="contained">Deploy</Button>
+<br />
+<br />
+	{/*      <TextField 
+		id="outlined-basic" 
+		defaultValue={data} 
+		variant="outlined" 
+	/>
 
-        
         {/* <a
           className="App-link"
           href="https://reactjs.org"
