@@ -1,5 +1,9 @@
 # AWS
 aws/.terraform/*
+azure/.terraform/*
+gcp/.terraform/*
+oracle/.terraform/*
+alibaba/.terraform/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
