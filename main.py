@@ -92,6 +92,40 @@ def configuration():
                 "password": "@Password@123"
                 }
         return temp_data
+    elif (platform == "gcp"):
+
+        print('GCP code here')
+
+        import paramiko
+        docker_image = 'crccheck/hello-world'
+        command = "sudo apt-get update && sudo apt-get install -y docker.io && sudo chmod 777 /var/run/docker.sock && docker pull " + docker_image + " && docker run -d --rm --name web-test -p 80:8000 " + docker_image
+        # Set the key filename
+        key_filename = 'aws/terraform_ec2_key'
+
+        # Create an SSH client object
+        ssh = paramiko.SSHClient()
+
+        # Automatically add the host key (not recommended for production use)
+        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+
+        # Load the private key
+        key = paramiko.RSAKey.from_private_key_file(key_filename)
+
+        # Connect to the remote instance using SSH key authentication
+        ssh.connect(hostname='34.72.7.154', username='ubuntu', pkey=key)
+
+        # Now you can run commands on the remote instance via the SSH connection, for example:
+        stdin, stdout, stderr = ssh.exec_command(command)
+        print(stdout.read())
+
+        # Close the SSH connection when finished
+        ssh.close()
+
+        temp_data = {
+                "result": "will be given in the next iteration",
+                "password": "sshkey"
+                }
+        return temp_data
     elif (platform == "aws"):
 
         f = open("aws/terraform_output", "r")
