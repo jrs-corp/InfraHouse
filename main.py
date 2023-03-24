@@ -42,13 +42,13 @@ def configuration():
     subprocess.call('cd ' + platform + ' && terraform output', shell=True)
     # print(result)
     print('CHECK THE OUTPUT NOW----------------------')
-    subprocess.call('cd ' + platform + ' && terraform output instance_public_ip > terraform_output', shell=True)
-    #subprocess.call('export MY_OUTPUT_VARIABLE=$(terraform output instance_public_ip)', shell=True)
+        #subprocess.call('export MY_OUTPUT_VARIABLE=$(terraform output instance_public_ip)', shell=True)
     #subprocess.call('echo $MY_OUTPUT_VARIABLE', shell=True)
     # print(result)
 
     if (platform=="azure"):
         print('Azure code here')
+        subprocess.call('cd ' + platform + ' && terraform output public_ip_address > terraform_output', shell=True)
 
 
         docker_image = imagelocation
@@ -57,11 +57,16 @@ def configuration():
 
         # Update the next three lines with your
         # server's information
+        f = open("azure/terraform_output", "r")
+        tempData = f.read()
+        print('tempData')
+        print(tempData[1:-2])
+        print('ENDDDDDDDDDDDDDDDDDDDDDDd')
 
-        host = "20.161.7.53"
+        host = tempData[1:-2]
         username = "azureuser"
         password = "@Password@123"
-
+        import paramiko
         client = paramiko.client.SSHClient()
         client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         client.connect(host, username=username, password=password)
@@ -87,14 +92,30 @@ def configuration():
         # Print the output
         #print(stdout.decode())
         #print(stderr.decode())
+        f = open("azure/terraform_output", "r")
+        tempData = f.read()
+        print('tempData')
+        print(tempData[1:-2])
+        print('ENDDDDDDDDDDDDDDDDDDDDDDd')
         temp_data = {
-                "result": "20.161.7.53",
-                "password": "@Password@123"
+                "result": tempData[1:-2],
+                "pem": "@Password@123"
                 }
+
+#        temp_data = {
+#                "result": "20.161.7.53",
+#                "password": "@Password@123"
+#                }
         return temp_data
     elif (platform == "gcp"):
 
         print('GCP code here')
+        subprocess.call('cd ' + platform + ' && terraform output public_ip > terraform_output', shell=True)
+
+        f = open("gcp/terraform_output", "r")
+        tempData = f.read()
+        print('tempData')
+        print(tempData[1:-2])
 
         import paramiko
         docker_image = 'crccheck/hello-world'
@@ -112,7 +133,7 @@ def configuration():
         key = paramiko.RSAKey.from_private_key_file(key_filename)
 
         # Connect to the remote instance using SSH key authentication
-        ssh.connect(hostname='34.72.7.154', username='ubuntu', pkey=key)
+        ssh.connect(hostname=tempData[1:-2], username='ubuntu', pkey=key)
 
         # Now you can run commands on the remote instance via the SSH connection, for example:
         stdin, stdout, stderr = ssh.exec_command(command)
@@ -120,13 +141,62 @@ def configuration():
 
         # Close the SSH connection when finished
         ssh.close()
-
+        f = open("gcp/terraform_output", "r")
+        tempData = f.read()
+        print('tempData')
+        print(tempData[1:-2])
+        print('ENDDDDDDDDDDDDDDDDDDDDDDd')
         temp_data = {
-                "result": "will be given in the next iteration",
-                "password": "sshkey"
+                "result": tempData[1:-2],
+                "pem": "@Password@123"
                 }
         return temp_data
+    elif (platform == "oracle"):
+        print('Oracle code here')
+        subprocess.call('cd ' + platform + ' && terraform output public_ip > terraform_output', shell=True)
+
+        f = open("oracle/terraform_output", "r")
+        tempData = f.read()
+        print('tempData')
+        print(tempData[1:-2])
+
+        import paramiko
+        docker_image = 'crccheck/hello-world'
+        command = "sudo apt-get update && sudo apt-get install -y docker.io && sudo chmod 777 /var/run/docker.sock && docker pull " + docker_image + " && docker run -d --rm --name web-test -p 80:8000 " + docker_image
+        # Set the key filename
+        key_filename = 'aws/terraform_ec2_key'
+
+        # Create an SSH client object
+        ssh = paramiko.SSHClient()
+
+        # Automatically add the host key (not recommended for production use)
+        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+
+        # Load the private key
+        key = paramiko.RSAKey.from_private_key_file(key_filename)
+
+        # Connect to the remote instance using SSH key authentication
+        ssh.connect(hostname=tempData[1:-2], username='ubuntu', pkey=key)
+
+        # Now you can run commands on the remote instance via the SSH connection, for example:
+        stdin, stdout, stderr = ssh.exec_command(command)
+        print(stdout.read())
+
+        # Close the SSH connection when finished
+        ssh.close()
+        f = open("oracle/terraform_output", "r")
+        tempData = f.read()
+        print('tempData')
+        print(tempData[1:-2])
+        print('ENDDDDDDDDDDDDDDDDDDDDDDd')
+        temp_data = {
+                "result": tempData[1:-2],
+                "pem": "@Password@123"
+                }
+        return temp_data
+
     elif (platform == "aws"):
+        subprocess.call('cd ' + platform + ' && terraform output instance_public_ip > terraform_output', shell=True)
 
         f = open("aws/terraform_output", "r")
         tempData = f.read()
