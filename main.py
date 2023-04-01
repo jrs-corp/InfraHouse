@@ -121,7 +121,7 @@ def configuration():
         print(tempData[1:-2])
 
         import paramiko
-        docker_image = 'crccheck/hello-world'
+        docker_image = imagelocation#'crccheck/hello-world'
         command = "sudo apt-get update && sudo apt-get install -y docker.io && sudo chmod 777 /var/run/docker.sock && docker pull " + docker_image + " && docker run -d --rm --name web-test -p 80:8000 " + docker_image
         # Set the key filename
         key_filename = 'aws/terraform_ec2_key'
@@ -215,7 +215,7 @@ def configuration():
         print(tempData[1:-2])
 
         import paramiko
-        docker_image = 'crccheck/hello-world'
+        docker_image = imagelocation#'crccheck/hello-world'
         command = "sudo apt-get update && sudo apt-get install -y docker.io && sudo chmod 777 /var/run/docker.sock && docker pull " + docker_image + " && docker run -d --rm --name web-test -p 80:8000 " + docker_image
         # Set the key filename
         key_filename = 'aws/terraform_ec2_key'
@@ -301,6 +301,37 @@ def configuration():
 
     elif (platform == "aws"):
         subprocess.call('cd ' + platform + ' && terraform output instance_public_ip > terraform_output', shell=True)
+        time.sleep(60)
+
+        f = open("aws/terraform_output", "r")
+        tempData = f.read()
+        print('tempData')
+        print(tempData[1:-2])
+
+        import paramiko
+        docker_image = imagelocation#'crccheck/hello-world'
+        command = "sudo apt-get update && sudo apt-get install -y docker.io && sudo chmod 777 /var/run/docker.sock && docker pull " + docker_image + " && docker run -d --rm --name web-test -p 80:8000 " + docker_image
+        # Set the key filename
+        key_filename = 'aws/terraform_ec2_key'
+
+        # Create an SSH client object
+        ssh = paramiko.SSHClient()
+
+        # Automatically add the host key (not recommended for production use)
+        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+
+        # Load the private key
+        key = paramiko.RSAKey.from_private_key_file(key_filename)
+
+        # Connect to the remote instance using SSH key authentication
+        ssh.connect(hostname=tempData[1:-2], username='ec2-user', pkey=key)
+
+        # Now you can run commands on the remote instance via the SSH connection, for example:
+        stdin, stdout, stderr = ssh.exec_command(command)
+        print(stdout.read())
+
+        # Close the SSH connection when finished
+        ssh.close()
 
         f = open("aws/terraform_output", "r")
         tempData = f.read()
