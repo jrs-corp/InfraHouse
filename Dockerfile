@@ -2,7 +2,15 @@ FROM quay.io/centos/centos:stream9
 RUN yum install -y yum-utils
 RUN yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
 RUN yum -y install terraform
-RUN yum install -y python3
+
+# Update package index and install necessary packages
+RUN yum update -y && \
+    yum install -y epel-release && \
+    yum install -y python3 && \
+    yum install -y python3-pip gcc python3-devel openssl-devel && \
+    yum clean all
+
+# # RUN yum install -y python3
 RUN pip3 install flask
 RUN pip3 install flask-cors
 WORKDIR infra
