@@ -1,4 +1,4 @@
-FROM centos:7
+FROM quay.io/centos/centos:stream9
 RUN yum install -y yum-utils
 RUN yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
 RUN yum -y install terraform
