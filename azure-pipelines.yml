@@ -9,6 +9,15 @@ steps:
 - script: echo Hello, world, Production!
   displayName: 'Run a one-line script'
 
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your commands here
+      
+      echo '$(Pipeline.Workspace)'
+
+
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
@@ -21,6 +30,40 @@ steps:
     # docker pull hello-world
     docker tag hello-world infrahouse.azurecr.io/hello-world
   displayName: 'Run a multi-line script'
+
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your commands here
+      
+      echo '
+      #!/bin/bash
+
+      export AWS_ACCESS_KEY_ID=$(AWS_ACCESS_KEY_ID)
+      export AWS_SECRET_ACCESS_KEY=$(AWS_SECRET_ACCESS_KEY)
+
+      export ARM_CLIENT_ID=$(ARM_CLIENT_ID) 
+      export ARM_CLIENT_SECRET=$(ARM_CLIENT_SECRET)
+      export ARM_TENANT_ID=$(ARM_TENANT_ID)
+      export ARM_SUBSCRIPTION_ID=$(ARM_SUBSCRIPTION_ID)
+
+      export GOOGLE_APPLICATION_CREDENTIALS=/infra/gcp/neat-tube-375815-ed168b2bfde9.json 
+
+      tmux new -s backendserver -d
+      tmux send-keys "python3 main.py" C-m
+
+      cd /infra/frontend
+      tmux new -s frontendserver -d
+      tmux send-keys "npm start" C-m
+
+      while :
+      do
+        sleep 1
+      done
+
+      exec "/bin/bash";
+      ' > start.sh
 
 # - task: Docker@2
 #   inputs:
@@ -62,7 +105,9 @@ steps:
       touch buildId.txt
       echo "$(Build.BuildId)">buildId.txt
 
+
+
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: '$(Pipeline.Workspace)'
+    targetPath: '$(Pipeline.Workspace)/s/buildId.txt'
     publishLocation: 'pipeline'
