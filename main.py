@@ -204,7 +204,7 @@ def configuration():
         return temp_data
     elif (platform == "oracle"):
         print('Oracle code here')
-        time.sleep(30)
+        time.sleep(60)
         subprocess.call('cd ' + platform + ' && terraform output public_ip > terraform_output', shell=True)
 
         f = open("oracle/terraform_output", "r")
