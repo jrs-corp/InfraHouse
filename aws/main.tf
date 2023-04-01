@@ -43,7 +43,7 @@ resource "aws_key_pair" "terraform_ec2_key" {
 #}
 
 resource "aws_instance" "app_server" {
-  ami           = "ami-0b5eea76982371e91"
+  ami           = "ami-006e00d6ac75d2ebb"
   instance_type = "t2.micro"
   key_name = aws_key_pair.terraform_ec2_key.key_name
   # Add username and password for login
