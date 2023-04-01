@@ -59,18 +59,18 @@ resource "aws_instance" "app_server" {
     Name = var.instance_name
   }
 
-  user_data = <<-EOF
-              #!/bin/bash
-              sudo yum install docker -y
-	      sudo systemctl start docker
-	      sudo chmod 777 /var/run/docker.sock
-	      docker pyll python
-	      docker run python
-	      docker pull ${var.docker_image}
-              #docker pull crccheck/hello-world
-              docker run -d --rm --name web-test -p 80:8000 ${var.docker_image}
-              EOF
-
+  #user_data = <<-EOF
+  #            #!/bin/bash
+  #            sudo yum install docker -y
+#	      sudo systemctl start docker
+#	      sudo chmod 777 /var/run/docker.sock
+#	      docker pyll python
+#	      docker run python
+#	      docker pull ${var.docker_image}
+ #             #docker pull crccheck/hello-world
+ #             docker run -d --rm --name web-test -p 80:8000 ${var.docker_image}
+ #             EOF
+#
 }
 
 
