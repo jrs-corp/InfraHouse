@@ -31,6 +31,7 @@ def configuration():
     platform = request.get_json()['platform']
     codelocation = request.get_json()['codelocation']
     imagelocation = request.get_json()['imagelocation']
+    imagelocation = codelocation
     print(platform, codelocation)
     subprocess.run(["pwd"])
     # subprocess.Popen("ls", cwd="/")
