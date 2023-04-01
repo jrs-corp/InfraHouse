@@ -49,6 +49,7 @@ def configuration():
 
     if (platform=="azure"):
         print('Azure code here')
+        time.sleep(60)
         subprocess.call('cd ' + platform + ' && terraform output public_ip_address > terraform_output', shell=True)
 
 
@@ -111,6 +112,7 @@ def configuration():
     elif (platform == "gcp"):
 
         print('GCP code here')
+        time.sleep(60)
         subprocess.call('cd ' + platform + ' && terraform output public_ip > terraform_output', shell=True)
 
         f = open("gcp/terraform_output", "r")
