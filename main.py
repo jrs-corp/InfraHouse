@@ -324,7 +324,7 @@ def configuration():
         key = paramiko.RSAKey.from_private_key_file(key_filename)
 
         # Connect to the remote instance using SSH key authentication
-        ssh.connect(hostname=tempData[1:-2], username='ec2-user', pkey=key)
+        ssh.connect(hostname=tempData[1:-2], username='ubuntu', pkey=key)
 
         # Now you can run commands on the remote instance via the SSH connection, for example:
         stdin, stdout, stderr = ssh.exec_command(command)
