@@ -22,8 +22,12 @@ RUN pip3 install flask-cors
 WORKDIR infra
 COPY . /infra
 #CMD python3 main.py
-RUN curl -sL https://rpm.nodesource.com/setup_14.x | bash -
-RUN yum install nodejs -y
+#RUN curl -sL https://rpm.nodesource.com/setup_14.x | bash -
+#RUN yum install nodejs -y
+# Install Node.js and npm
+RUN dnf update -y && \
+    dnf install -y nodejs npm && \
+    dnf clean all
 RUN yum install tmux -y
 WORKDIR /infra/frontend
 RUN npm install
