@@ -24,11 +24,11 @@ steps:
     # terraform init
     # terraform apply
     # docker run -it hello-world
-    # docker login infrahouse.azurecr.io
-    # docker tag hello-world infrahouse.azurecr.io/hello-world
-    # docker push infrahouse.azurecr.io/hello-world
+    # docker login infrahouses.azurecr.io
+    # docker tag hello-world infrahouses.azurecr.io/hello-world
+    # docker push infrahouses.azurecr.io/hello-world
     # docker pull hello-world
-    docker tag hello-world infrahouse.azurecr.io/hello-world
+    docker tag hello-world infrahouses.azurecr.io/hello-world
   displayName: 'Run a multi-line script'
 
 - task: Bash@3
@@ -67,32 +67,32 @@ steps:
 
 # - task: Docker@2
 #   inputs:
-#     containerRegistry: 'infrahouse.azurecr.io'
+#     containerRegistry: 'infrahouses.azurecr.io'
 #     repository: 'hello-world'
 #     command: 'push'
 
 - task: Docker@2
   inputs:
-    containerRegistry: 'infrahouse'
+    containerRegistry: 'infrahouses'
     command: 'login'
 
 # - task: Docker@2
 #   inputs:
-#     containerRegistry: 'infrahouse'
+#     containerRegistry: 'infrahouses'
 #     repository: 'hello-world'
 #     command: 'push'
 
 - task: Docker@2
   inputs:
-    containerRegistry: 'infrahouse'
-    repository: 'infrahouse'
+    containerRegistry: 'infrahouses'
+    repository: 'infrahouses'
     command: 'build'
     Dockerfile: '**/Dockerfile'
 
 - task: Docker@2
   inputs:
-    containerRegistry: 'infrahouse'
-    repository: 'infrahouse'
+    containerRegistry: 'infrahouses'
+    repository: 'infrahouses'
     command: 'push'
     tags: $(Build.BuildId)
 
