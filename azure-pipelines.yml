@@ -28,7 +28,7 @@ steps:
     # docker tag hello-world infrahouses.azurecr.io/hello-world
     # docker push infrahouses.azurecr.io/hello-world
     # docker pull hello-world
-    docker tag hello-world infrahouses.azurecr.io/hello-world
+    # docker tag hello-world infrahouses.azurecr.io/hello-world
   displayName: 'Run a multi-line script'
 
 - task: Bash@3
